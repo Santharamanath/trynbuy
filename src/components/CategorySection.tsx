@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Eye, Footprints, Crown } from "lucide-react";
 import productGlasses from "@/assets/product-glasses.jpg";
 import productShoes from "@/assets/product-shoes.jpg";
@@ -47,9 +48,9 @@ const CategorySection = () => {
         {/* Categories Grid */}
         <div className="grid md:grid-cols-3 gap-8">
           {categories.map((category, index) => (
-            <a
+            <Link
               key={category.id}
-              href={`#${category.id}`}
+              to={`/category/${category.id}`}
               className="group relative overflow-hidden rounded-3xl gradient-card shadow-card hover:shadow-elevated transition-all duration-500 hover:-translate-y-2"
               style={{ animationDelay: `${index * 0.15}s` }}
             >
@@ -81,7 +82,7 @@ const CategorySection = () => {
 
               {/* Hover Overlay */}
               <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </a>
+            </Link>
           ))}
         </div>
       </div>

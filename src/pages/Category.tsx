@@ -1,0 +1,211 @@
+import { useParams, useNavigate } from "react-router-dom";
+import { useProducts, ProductCategory } from "@/hooks/useProducts";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, Star, Eye, ShoppingCart } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { Helmet } from "react-helmet";
+
+const categoryInfo: Record<ProductCategory, { title: string; description: string }> = {
+  glasses: {
+    title: "Glasses",
+    description: "Find your perfect frames with AR face scanning technology",
+  },
+  shoes: {
+    title: "Shoes",
+    description: "Step into style with virtual foot fitting",
+  },
+  hats: {
+    title: "Hats",
+    description: "Top off your look with AR hat try-on",
+  },
+  accessories: {
+    title: "Accessories",
+    description: "Complete your style with premium accessories",
+  },
+};
+
+const Category = () => {
+  const { category } = useParams<{ category: string }>();
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const validCategory = category as ProductCategory;
+  const info = categoryInfo[validCategory];
+
+  const { data: products, isLoading, error } = useProducts(validCategory);
+
+  if (!info) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Category not found</h1>
+          <Button onClick={() => navigate("/")}>Go Home</Button>
+        </div>
+      </div>
+    );
+  }
+
+  const handleBuyNow = (productName: string) => {
+    toast({
+      title: "Added to Cart",
+      description: `${productName} has been added to your cart.`,
+    });
+  };
+
+  const handleTryOn = (productName: string) => {
+    toast({
+      title: "AR Try-On",
+      description: `Starting AR try-on for ${productName}...`,
+    });
+  };
+
+  return (
+    <>
+      <Helmet>
+        <title>{info.title} | TryNBuy - AR Virtual Try-On</title>
+        <meta name="description" content={info.description} />
+      </Helmet>
+
+      <div className="min-h-screen bg-background">
+        {/* Header */}
+        <div className="glass fixed top-0 left-0 right-0 z-50">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center h-20">
+              <Button variant="ghost" onClick={() => navigate("/")}>
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back
+              </Button>
+              <h1 className="text-2xl font-display font-bold text-gradient ml-4">
+                {info.title}
+              </h1>
+            </div>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12">
+          {/* Category Header */}
+          <div className="text-center mb-12 animate-slide-up">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold mb-4">
+              Shop <span className="text-gradient">{info.title}</span>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              {info.description}
+            </p>
+          </div>
+
+          {/* Loading State */}
+          {isLoading && (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {[...Array(8)].map((_, i) => (
+                <div key={i} className="gradient-card rounded-2xl p-4 animate-pulse">
+                  <div className="aspect-square bg-muted rounded-xl mb-4" />
+                  <div className="h-4 bg-muted rounded w-3/4 mb-2" />
+                  <div className="h-4 bg-muted rounded w-1/2" />
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Error State */}
+          {error && (
+            <div className="text-center py-12">
+              <p className="text-destructive mb-4">Failed to load products</p>
+              <Button onClick={() => window.location.reload()}>Try Again</Button>
+            </div>
+          )}
+
+          {/* Products Grid */}
+          {products && products.length > 0 && (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {products.map((product, index) => (
+                <div
+                  key={product.id}
+                  className="group gradient-card rounded-2xl overflow-hidden shadow-card hover:shadow-elevated transition-all duration-500 hover:-translate-y-2 animate-slide-up"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  {/* Image */}
+                  <div className="aspect-square relative overflow-hidden bg-muted">
+                    <img
+                      src={product.image_url || "/placeholder.svg"}
+                      alt={product.name}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    {product.ar_enabled && (
+                      <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-primary/90 text-primary-foreground text-xs font-medium flex items-center gap-1">
+                        <Eye className="h-3 w-3" />
+                        AR Ready
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-4">
+                    {/* Rating */}
+                    {product.rating && (
+                      <div className="flex items-center gap-1 mb-2">
+                        <Star className="h-4 w-4 fill-primary text-primary" />
+                        <span className="text-sm font-medium">{product.rating}</span>
+                      </div>
+                    )}
+
+                    {/* Name */}
+                    <h3 className="font-display font-semibold text-lg mb-1 group-hover:text-primary transition-colors">
+                      {product.name}
+                    </h3>
+
+                    {/* Description */}
+                    {product.description && (
+                      <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                        {product.description}
+                      </p>
+                    )}
+
+                    {/* Price */}
+                    <p className="text-xl font-bold text-primary mb-4">
+                      ${product.price.toFixed(2)}
+                    </p>
+
+                    {/* Actions */}
+                    <div className="flex gap-2">
+                      {product.ar_enabled && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="flex-1"
+                          onClick={() => handleTryOn(product.name)}
+                        >
+                          <Eye className="h-4 w-4 mr-1" />
+                          Try On
+                        </Button>
+                      )}
+                      <Button
+                        variant="default"
+                        size="sm"
+                        className="flex-1 gradient-accent text-primary-foreground"
+                        onClick={() => handleBuyNow(product.name)}
+                      >
+                        <ShoppingCart className="h-4 w-4 mr-1" />
+                        Buy Now
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Empty State */}
+          {products && products.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground mb-4">No products found in this category</p>
+              <Button onClick={() => navigate("/")}>Browse Other Categories</Button>
+            </div>
+          )}
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Category;
