@@ -1,9 +1,14 @@
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useProducts, ProductCategory } from "@/hooks/useProducts";
+import { useProducts, ProductCategory, Product } from "@/hooks/useProducts";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Star, Eye, ShoppingCart } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import { Helmet } from "react-helmet";
+import Navbar from "@/components/Navbar";
+import CartSheet from "@/components/CartSheet";
+import ARTryOnModal from "@/components/ARTryOnModal";
 
 const categoryInfo: Record<ProductCategory, { title: string; description: string }> = {
   glasses: {
@@ -28,6 +33,10 @@ const Category = () => {
   const { category } = useParams<{ category: string }>();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { addItem, setIsOpen: openCart } = useCart();
+
+  const [arProduct, setArProduct] = useState<Product | null>(null);
+  const [isArOpen, setIsArOpen] = useState(false);
 
   const validCategory = category as ProductCategory;
   const info = categoryInfo[validCategory];
@@ -45,18 +54,18 @@ const Category = () => {
     );
   }
 
-  const handleBuyNow = (productName: string) => {
+  const handleAddToCart = (product: Product) => {
+    addItem(product);
     toast({
       title: "Added to Cart",
-      description: `${productName} has been added to your cart.`,
+      description: `${product.name} has been added to your cart.`,
     });
+    openCart(true);
   };
 
-  const handleTryOn = (productName: string) => {
-    toast({
-      title: "AR Try-On",
-      description: `Starting AR try-on for ${productName}...`,
-    });
+  const handleTryOn = (product: Product) => {
+    setArProduct(product);
+    setIsArOpen(true);
   };
 
   return (
@@ -67,28 +76,29 @@ const Category = () => {
       </Helmet>
 
       <div className="min-h-screen bg-background">
-        {/* Header */}
-        <div className="glass fixed top-0 left-0 right-0 z-50">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center h-20">
-              <Button variant="ghost" onClick={() => navigate("/")}>
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Back
-              </Button>
-              <h1 className="text-2xl font-display font-bold text-gradient ml-4">
-                {info.title}
-              </h1>
-            </div>
-          </div>
-        </div>
+        <Navbar />
+        <CartSheet />
+        <ARTryOnModal 
+          product={arProduct} 
+          isOpen={isArOpen} 
+          onClose={() => setIsArOpen(false)} 
+        />
 
         {/* Content */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12">
+          {/* Back Button & Header */}
+          <div className="mb-8">
+            <Button variant="ghost" onClick={() => navigate("/")} className="mb-4">
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Home
+            </Button>
+          </div>
+
           {/* Category Header */}
           <div className="text-center mb-12 animate-slide-up">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold mb-4">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold mb-4">
               Shop <span className="text-gradient">{info.title}</span>
-            </h2>
+            </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               {info.description}
             </p>
@@ -173,7 +183,7 @@ const Category = () => {
                           variant="outline"
                           size="sm"
                           className="flex-1"
-                          onClick={() => handleTryOn(product.name)}
+                          onClick={() => handleTryOn(product)}
                         >
                           <Eye className="h-4 w-4 mr-1" />
                           Try On
@@ -183,10 +193,10 @@ const Category = () => {
                         variant="default"
                         size="sm"
                         className="flex-1 gradient-accent text-primary-foreground"
-                        onClick={() => handleBuyNow(product.name)}
+                        onClick={() => handleAddToCart(product)}
                       >
                         <ShoppingCart className="h-4 w-4 mr-1" />
-                        Buy Now
+                        Add to Cart
                       </Button>
                     </div>
                   </div>

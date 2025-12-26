@@ -3,13 +3,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ShoppingBag, User, LogOut } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/hooks/use-toast";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, signOut } = useAuth();
+  const { getTotalItems, setIsOpen: openCart } = useCart();
   const navigate = useNavigate();
   const { toast } = useToast();
+
+  const totalItems = getTotalItems();
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -24,6 +28,10 @@ const Navbar = () => {
       title: "Signed out",
       description: "You have been signed out successfully.",
     });
+  };
+
+  const handleCartClick = () => {
+    openCart(true);
   };
 
   return (
@@ -50,8 +58,18 @@ const Navbar = () => {
 
           {/* Right Section */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" size="icon">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="relative"
+              onClick={handleCartClick}
+            >
               <ShoppingBag className="h-5 w-5" />
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full gradient-accent text-primary-foreground text-xs font-bold flex items-center justify-center">
+                  {totalItems > 99 ? "99+" : totalItems}
+                </span>
+              )}
             </Button>
             {user ? (
               <div className="flex items-center gap-3">
@@ -72,12 +90,27 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-foreground"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          <div className="md:hidden flex items-center gap-2">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="relative"
+              onClick={handleCartClick}
+            >
+              <ShoppingBag className="h-5 w-5" />
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full gradient-accent text-primary-foreground text-xs font-bold flex items-center justify-center">
+                  {totalItems > 99 ? "99+" : totalItems}
+                </span>
+              )}
+            </Button>
+            <button
+              className="text-foreground"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
@@ -95,9 +128,6 @@ const Navbar = () => {
                 </Link>
               ))}
               <div className="flex items-center space-x-4 px-4 pt-4 border-t border-border">
-                <Button variant="ghost" size="icon">
-                  <ShoppingBag className="h-5 w-5" />
-                </Button>
                 {user ? (
                   <Button variant="glass" className="flex-1" onClick={handleSignOut}>
                     <LogOut className="h-4 w-4 mr-2" />
