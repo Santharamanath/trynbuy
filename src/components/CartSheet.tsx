@@ -1,18 +1,16 @@
+import { useNavigate } from "react-router-dom";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Minus, Plus, Trash2, ShoppingBag, ArrowRight } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
-import { useToast } from "@/hooks/use-toast";
 
 const CartSheet = () => {
+  const navigate = useNavigate();
   const { items, isOpen, setIsOpen, removeItem, updateQuantity, getTotalPrice, clearCart } = useCart();
-  const { toast } = useToast();
 
   const handleCheckout = () => {
-    toast({
-      title: "Checkout",
-      description: "Checkout functionality coming soon!",
-    });
+    setIsOpen(false);
+    navigate("/checkout");
   };
 
   const totalPrice = getTotalPrice();
