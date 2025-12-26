@@ -94,11 +94,11 @@ CREATE TRIGGER update_profiles_updated_at
 -- Insert sample products
 INSERT INTO public.products (name, description, price, category, image_url, ar_enabled, rating) VALUES
 -- Glasses
-('Classic Aviator', 'Timeless aviator sunglasses with gold frame', 149.99, 'glasses', '/placeholder.svg', true, 4.8),
-('Modern Wayfarer', 'Contemporary wayfarer with polarized lenses', 129.99, 'glasses', '/placeholder.svg', true, 4.6),
-('Sport Shield', 'Performance sports sunglasses', 189.99, 'glasses', '/placeholder.svg', true, 4.7),
-('Vintage Round', 'Retro-inspired round frames', 99.99, 'glasses', '/placeholder.svg', true, 4.5),
-('Cat Eye Elegance', 'Sophisticated cat-eye design', 159.99, 'glasses', '/placeholder.svg', true, 4.9),
+('Classic Aviator', 'Timeless aviator sunglasses with gold frame', 149.99, 'glasses', '/hero-glasses.jpg', true, 4.8),
+('Modern Wayfarer', 'Contemporary wayfarer with polarized lenses', 129.99, 'glasses', '/hero-glasses.jpg', true, 4.6),
+('Sport Shield', 'Performance sports sunglasses', 189.99, 'glasses', '/hero-glasses.jpg', true, 4.7),
+('Vintage Round', 'Retro-inspired round frames', 99.99, 'glasses', '/hero-glasses.jpg', true, 4.5),
+('Cat Eye Elegance', 'Sophisticated cat-eye design', 159.99, 'glasses', '/hero-glasses.jpg', true, 4.9),
 -- Shoes
 ('Urban Runner Pro', 'Premium running shoes for city streets', 179.99, 'shoes', '/placeholder.svg', true, 4.7),
 ('Classic Leather Oxford', 'Handcrafted leather dress shoes', 249.99, 'shoes', '/placeholder.svg', true, 4.8),
