@@ -126,7 +126,7 @@ const ARTryOnModal = ({ product, isOpen, onClose }: ARTryOnModalProps) => {
                 <img
                   src={product.image_url || "/placeholder.svg"}
                   alt={product.name}
-                  className="w-48 h-48 object-contain opacity-70 mix-blend-overlay"
+                  className="w-48 h-48 object-contain opacity-70"
                 />
               </div>
               {/* AR Guidelines */}
