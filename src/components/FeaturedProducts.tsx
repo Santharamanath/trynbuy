@@ -6,16 +6,49 @@ import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
 import ARTryOnModal from "@/components/ARTryOnModal";
-import productGlasses from "@/assets/product-glasses.jpg";
-import productShoes from "@/assets/product-shoes.jpg";
-import productHat from "@/assets/product-hat.jpg";
+
+// Product images
+import classicAviator from "@/assets/products/classic-aviator.jpg";
+import modernWayfarer from "@/assets/products/modern-wayfarer.jpg";
+import sportShield from "@/assets/products/sport-shield.jpg";
+import vintageRound from "@/assets/products/vintage-round.jpg";
+import catEye from "@/assets/products/cat-eye.jpg";
+import urbanRunner from "@/assets/products/urban-runner.jpg";
+import leatherOxford from "@/assets/products/leather-oxford.jpg";
+import streetSneaker from "@/assets/products/street-sneaker.jpg";
+import athleticTraining from "@/assets/products/athletic-training.jpg";
+import fedoraClassic from "@/assets/products/fedora-classic.jpg";
+
+// Category fallbacks
+import categoryGlasses from "@/assets/category-glasses.jpg";
+import categoryShoes from "@/assets/category-shoes.jpg";
+import categoryHats from "@/assets/category-hats.jpg";
+
+// Product name to image mapping
+const productImages: Record<string, string> = {
+  "Classic Aviator": classicAviator,
+  "Modern Wayfarer": modernWayfarer,
+  "Sport Shield": sportShield,
+  "Vintage Round": vintageRound,
+  "Cat Eye Elegance": catEye,
+  "Urban Runner Pro": urbanRunner,
+  "Classic Leather Oxford": leatherOxford,
+  "Street Style Sneaker": streetSneaker,
+  "Athletic Training X": athleticTraining,
+  "Fedora Classic": fedoraClassic,
+};
 
 // Fallback images based on category
 const categoryImages: Record<string, string> = {
-  glasses: productGlasses,
-  shoes: productShoes,
-  hats: productHat,
-  accessories: productGlasses,
+  glasses: categoryGlasses,
+  shoes: categoryShoes,
+  hats: categoryHats,
+  accessories: categoryGlasses,
+};
+
+// Get product image by name or fallback to category
+const getProductImage = (product: Product): string => {
+  return productImages[product.name] || categoryImages[product.category] || "/placeholder.svg";
 };
 
 const FeaturedProducts = () => {
@@ -88,7 +121,7 @@ const FeaturedProducts = () => {
                 {/* Image */}
                 <div className="relative aspect-square overflow-hidden">
                   <img
-                    src={product.image_url || categoryImages[product.category] || "/placeholder.svg"}
+                    src={getProductImage(product)}
                     alt={product.name}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
