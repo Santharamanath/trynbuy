@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { Eye, Footprints, Crown } from "lucide-react";
-import productGlasses from "@/assets/product-glasses.jpg";
-import productShoes from "@/assets/product-shoes.jpg";
-import productHat from "@/assets/product-hat.jpg";
+import categoryGlasses from "@/assets/category-glasses.jpg";
+import categoryShoes from "@/assets/category-shoes.jpg";
+import categoryHats from "@/assets/category-hats.jpg";
 
 const categories = [
   {
@@ -10,7 +10,7 @@ const categories = [
     title: "Glasses",
     description: "Find your perfect frames with AR face scanning",
     icon: Eye,
-    image: productGlasses,
+    image: categoryGlasses,
     count: "150+ styles",
   },
   {
@@ -18,7 +18,7 @@ const categories = [
     title: "Shoes",
     description: "Step into style with virtual foot fitting",
     icon: Footprints,
-    image: productShoes,
+    image: categoryShoes,
     count: "200+ pairs",
   },
   {
@@ -26,7 +26,7 @@ const categories = [
     title: "Hats",
     description: "Top off your look with AR hat try-on",
     icon: Crown,
-    image: productHat,
+    image: categoryHats,
     count: "100+ designs",
   },
 ];

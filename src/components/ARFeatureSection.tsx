@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Camera, Scan, Sparkles, CheckCircle2 } from "lucide-react";
+import arFeatureImage from "@/assets/ar-feature-phone.jpg";
 
 const features = [
   {
@@ -71,26 +72,16 @@ const ARFeatureSection = () => {
 
           {/* Right Visual */}
           <div className="relative">
-            {/* Phone Mockup */}
-            <div className="relative mx-auto max-w-sm">
-              <div className="aspect-[9/16] rounded-[3rem] gradient-card shadow-elevated p-3 border border-border">
-                <div className="w-full h-full rounded-[2.5rem] bg-muted flex items-center justify-center overflow-hidden">
-                  <div className="text-center p-8">
-                    <div className="w-20 h-20 mx-auto mb-6 rounded-full gradient-accent flex items-center justify-center animate-pulse-glow">
-                      <Camera className="h-10 w-10 text-primary-foreground" />
-                    </div>
-                    <h4 className="text-xl font-display font-bold text-foreground mb-2">
-                      AR Try-On Ready
-                    </h4>
-                    <p className="text-sm text-muted-foreground">
-                      Point your camera at your face to start the virtual try-on experience
-                    </p>
-                  </div>
-                </div>
-              </div>
+            {/* AR Feature Image */}
+            <div className="relative mx-auto max-w-md animate-float">
+              <img
+                src={arFeatureImage}
+                alt="AR Virtual Try-On Technology"
+                className="w-full rounded-3xl shadow-elevated"
+              />
 
               {/* Floating Elements */}
-              <div className="absolute -top-8 -right-8 glass px-4 py-3 rounded-2xl shadow-card animate-float">
+              <div className="absolute -top-6 -right-6 glass px-4 py-3 rounded-2xl shadow-card animate-float">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full gradient-gold flex items-center justify-center">
                     <Sparkles className="h-4 w-4 text-accent-foreground" />
@@ -102,7 +93,7 @@ const ARFeatureSection = () => {
                 </div>
               </div>
 
-              <div className="absolute -bottom-8 -left-8 glass px-4 py-3 rounded-2xl shadow-card animate-float" style={{ animationDelay: "2s" }}>
+              <div className="absolute -bottom-6 -left-6 glass px-4 py-3 rounded-2xl shadow-card animate-float" style={{ animationDelay: "2s" }}>
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full gradient-accent flex items-center justify-center">
                     <CheckCircle2 className="h-4 w-4 text-primary-foreground" />
