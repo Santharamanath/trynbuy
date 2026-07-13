@@ -5,7 +5,6 @@ TryNBuy is an innovative Augmented Reality (AR)-based e-commerce platform that a
 📌 Problem Statement
 
 Traditional online shopping faces several challenges:
-
 ❌ Customers cannot try products before purchasing.
 ❌ Difficulty in choosing the correct style and appearance.
 ❌ High product return rates due to mismatched expectations.
