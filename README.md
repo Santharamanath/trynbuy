@@ -1,73 +1,187 @@
-# Welcome to your Lovable project
+## TryNBuy — AR-Powered Virtual Try-On E-Commerce Platform
 
-## Project info
+TryNBuy is an innovative Augmented Reality (AR)-based e-commerce platform that allows users to virtually try products such as glasses, shoes, and hats before purchasing them. The platform combines online shopping with real-time AR technology, providing customers with an interactive, immersive, and confident shopping experience. By using the device camera, users can visualize how products look on them, reducing uncertainty and improving purchase decisions.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+📌 Problem Statement
 
-## How can I edit this code?
+Traditional online shopping faces several challenges:
 
-There are several ways of editing your application.
+❌ Customers cannot try products before purchasing.
+❌ Difficulty in choosing the correct style and appearance.
+❌ High product return rates due to mismatched expectations.
+❌ Lack of personalized shopping experience.
+❌ Low customer confidence while purchasing fashion accessories online.
+❌ Limited interaction with products before checkout.
 
-**Use Lovable**
+These challenges affect customer satisfaction and increase operational costs for e-commerce businesses.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+💡 Solution
 
-Changes made via Lovable will be committed automatically to this repo.
+TryNBuy introduces an AR-powered virtual shopping experience that enables customers to visualize products in real time using their device camera before making a purchase.
 
-**Use your preferred IDE**
+The platform provides:
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Real-time virtual try-on using Augmented Reality.
+Secure user authentication and profile management.
+Interactive product browsing with multiple categories.
+Shopping cart and seamless checkout process.
+Multiple payment options including UPI, Debit Card, and Credit Card.
+Modern, responsive, and user-friendly interface.
+⚙️ Key Features
+🥽 AR Virtual Try-On
+Real-time camera access.
+Virtual try-on for glasses, hats, and shoes.
+Interactive AR product overlay.
+Front and rear camera switching.
+Realistic shopping experience.
+🛍️ Product Catalog
+Browse products by category.
+Detailed product information.
+Ratings and pricing.
+AR-enabled product identification.
+👤 User Authentication
+User Registration
+Secure Login
+User Profile Management
+Session Management using Supabase Authentication.
+🛒 Smart Shopping Cart
+Add to Cart
+Remove Products
+Quantity Management
+Dynamic Price Calculation
+Cart Summary
+💳 Secure Checkout
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Supports multiple payment methods:
 
-Follow these steps:
+UPI
+Debit Card
+Credit Card
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+Future integration:
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Razorpay
+Stripe
+PayPal
+📷 Camera Integration
+Camera permission handling
+Front camera for face-based try-on
+Back camera support
+Live video streaming
+Camera switching functionality
+⭐ Product Ratings & Reviews
+Product ratings
+Customer reviews (Future Scope)
+Product popularity tracking
+🏗️ System Architecture
 
-# Step 3: Install the necessary dependencies.
-npm i
+TryNBuy follows a modern client-server architecture with cloud database integration.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+Components
+User Interface (React + TypeScript)
+Authentication Module
+Product Management Module
+AR Try-On Module
+Shopping Cart Module
+Payment Module
+Supabase Backend
+PostgreSQL Database
+Tech Stack
 
-**Edit a file directly in GitHub**
+Frontend
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+React.js
+TypeScript
+Tailwind CSS
+Vite
 
-**Use GitHub Codespaces**
+Backend
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Supabase
+PostgreSQL
 
-## What technologies are used for this project?
+Authentication
 
-This project is built with:
+Supabase Auth
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Database
 
-## How can I deploy this project?
+PostgreSQL
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+Cloud Platform
 
-## Can I connect a custom domain to my Lovable project?
+Supabase Cloud
 
-Yes, you can!
+Deployment
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Vercel / Lovable
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Version Control
+
+Git & GitHub
+🚀 How It Works
+User registers or logs into the platform.
+Browse products across different categories.
+Select a product.
+Click Try-On.
+Grant camera permission.
+Camera opens and displays the product using AR.
+User can switch cameras if required.
+Add the selected product to the cart.
+Review the cart.
+Proceed to checkout.
+Select payment method.
+Complete the purchase successfully.
+🎯 Objectives
+Improve online shopping experience using AR.
+Reduce product return rates.
+Increase customer confidence before purchase.
+Enable realistic virtual product visualization.
+Provide secure online shopping.
+Simplify product selection.
+Deliver an engaging and interactive shopping platform.
+Support multiple product categories.
+Provide fast and responsive performance.
+Enhance customer satisfaction through immersive technology.
+📊 Impact
+Improves customer purchasing confidence.
+Reduces unnecessary product returns.
+Increases customer engagement.
+Enhances online shopping experience.
+Saves customers time and effort.
+Bridges the gap between physical and online shopping.
+Supports digital transformation in e-commerce.
+Encourages adoption of AR technology in retail.
+🔐 Non-Functional Highlights
+Responsive user interface.
+Secure authentication.
+Cloud-hosted database.
+Fast loading performance.
+Cross-platform compatibility.
+Mobile-friendly design.
+Scalable architecture.
+Reliable database management.
+Easy maintenance.
+High availability.
+📚 Future Enhancements
+AI-based face detection for precise product alignment.
+3D product models instead of 2D overlays.
+Virtual furniture placement using room scanning.
+Personalized product recommendations using AI.
+Voice-assisted shopping.
+Wishlist and order history.
+Product review and rating system.
+Multi-language support.
+Live customer support chatbot.
+Integration with payment gateways like Razorpay and Stripe.
+AI-powered fashion recommendation engine.
+Mobile application for Android and iOS.
+👨‍💻 Developed By
+
+Santha Ramanath M
+B.Tech Information Technology
+Saveetha Engineering College
+
+⭐ Final Note
+
+TryNBuy is more than just an online shopping website—it is an AR-powered smart retail platform that transforms the way customers shop online. By combining Augmented Reality, cloud technologies, secure authentication, and a modern e-commerce experience, the platform allows users to visualize products before purchasing, increasing confidence, reducing product returns, and creating a more engaging and personalized shopping journey. As AR technology continues to evolve, TryNBuy has the potential to become a next-generation intelligent retail solution for the future of digital commerce.
